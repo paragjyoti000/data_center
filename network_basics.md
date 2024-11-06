@@ -77,6 +77,8 @@ The OSI Model has **7 layers**, each responsible for specific network functions:
 7. **Application Layer**:
     - Provides services directly to users (e.g., HTTP, FTP).
 
+![OSI Model](https://bluecatnetworks.com/wp-content/uploads/2022/08/The-7-layers-of-the-OSI-model_rev1-1.jpg)
+
 ---
 
 ## **Q. IP Address and Its Classes**
