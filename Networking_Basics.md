@@ -160,3 +160,23 @@ can do unicasting, multicasting, and broadcasting
 security risks are low
 more effecient.
 is a full duplex
+
+In networking, **ERGRP** might be a typo or misinterpretation of **EIGRP** (Enhanced Interior Gateway Routing Protocol). If this is what you meant, here's a brief explanation:
+
+### **EIGRP (Enhanced Interior Gateway Routing Protocol)**
+
+EIGRP is a dynamic routing protocol developed by Cisco that allows routers to share information efficiently within an autonomous system. It is often used in enterprise networks due to its scalability and ease of configuration.
+
+#### **Key Features of EIGRP**:
+
+1. **Fast Convergence**: Quickly adapts to network changes and recalculates routes.
+2. **Supports Multiple Protocols**: Can handle IPv4 and IPv6.
+3. **Uses DUAL Algorithm**: Diffusing Update Algorithm ensures loop-free and optimal routing.
+4. **Classless Routing**: Supports VLSM (Variable Length Subnet Mask).
+5. **Partial Updates**: Only sends updates when changes occur, reducing bandwidth usage.
+
+#### **How EIGRP Works**:
+
+-   **Neighbors Establishment**: Routers form neighbor relationships by exchanging Hello packets.
+-   **Topology Table**: Maintains all learned routes from neighbors.
+-   **Routing Table**: Stores the best routes based on metrics like bandwidth, delay, reliability, and load.
