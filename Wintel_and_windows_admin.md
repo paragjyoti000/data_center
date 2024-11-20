@@ -108,3 +108,83 @@ A **file system** is a method and structure that an operating system uses to man
         - Focuses on data integrity with built-in error detection and correction.
         - Supports large volumes and files, similar to NTFS, but with enhanced reliability.
         - Used primarily in storage solutions requiring high availability and resilience.
+
+---
+
+## Steps for Setting Up a Windows Server 2019 Domain Controller
+
+### Part 1: Setting Up the AD DC and DNS on Windows Server 2019
+
+To set up Windows Server 2019 as an Active Directory Domain Controller (AD DC) and DNS server, follow these steps:
+
+#### Step 1: Install Active Directory Domain Services (AD DS)
+
+1. **Open Server Manager** on the Windows Server 2019 VM.
+2. Click on **Manage** > **Add Roles and Features**.
+3. Select **Role-based or feature-based installation** and click **Next**.
+4. Choose the server from the server pool and click **Next**.
+5. Select **Active Directory Domain Services** and add features when prompted.
+6. Click **Next** and proceed through the wizard. Click **Install**.
+7. Wait for the installation to complete (it will not require a reboot at this stage).
+
+#### Step 2: Promote the Server to a Domain Controller
+
+1. After installation, click the **Notification** flag in Server Manager and choose **Promote this server to a domain controller**.
+2. Choose **Add a new forest** and enter your **root domain name** (e.g., `yourdomain.local`).
+3. Click **Next** and set a **Directory Services Restore Mode (DSRM) password**.
+4. Proceed through the remaining steps, keeping default settings unless specific customizations are needed.
+5. Verify that the **DNS** server option is selected (it should be by default) and click **Next**.
+6. Review and click **Install**. The server will automatically reboot to apply the changes.
+
+#### Step 3: Verify AD DS and DNS Configuration
+
+1. **Log in** after the reboot and open **Server Manager** to check that AD DS and DNS are functioning.
+2. Open **Active Directory Users and Computers** to confirm that the domain is active.
+3. Use **DNS Manager** (type `dnsmgmt.msc` in the Run dialog) to ensure the DNS server is running and configured to resolve queries for the domain.
+
+### Part 2: Connecting Windows 10 VM to the Domain Using DNS
+
+#### Step 1: Configure Network Settings on Windows Server 2019
+
+-   Set a **static IP address** for the server:
+    1. Go to **Control Panel > Network and Sharing Center > Change adapter settings**.
+    2. Right-click the network adapter, select **Properties**, and click **Internet Protocol Version 4 (TCP/IPv4)**.
+    3. Set a static IP (e.g., `192.168.1.10`) and use the server's own IP as the **Preferred DNS server**.
+
+#### Step 2: Configure DNS on Windows 10
+
+1. On the Windows 10 VM, open **Control Panel > Network and Sharing Center > Change adapter settings**.
+2. Right-click your network adapter and select **Properties**.
+3. Go to **Internet Protocol Version 4 (TCP/IPv4)** and set the **Preferred DNS server** to the IP address of the Windows Server 2019 (e.g., `192.168.1.10`).
+
+#### Step 3: Verify DNS Connectivity
+
+-   Open **Command Prompt** on Windows 10 and type:
+    ```bash
+    nslookup yourdomain.local
+    ```
+-   Ensure that it returns the correct IP address of the Windows Server 2019.
+
+#### Step 4: Join Windows 10 to the Domain
+
+1. Go to **Settings > System > About** or **Control Panel > System and Security > System** on Windows 10.
+2. Click **Join a domain** and enter the **domain name** (e.g., `yourdomain.local`).
+3. Provide **domain credentials** when prompted (e.g., `Administrator`).
+4. Restart the Windows 10 VM after joining the domain.
+
+#### Step 5: Verify the Connection
+
+-   Log in to the Windows 10 VM with a **domain account** (e.g., `yourdomain\username`).
+-   Confirm domain connectivity by testing `ping` to the domain:
+    ```bash
+    ping yourdomain.local
+    ```
+
+### **Troubleshooting Tips**:
+
+-   Ensure that **Windows Defender Firewall** on both VMs is configured to allow domain, DNS, and ICMP (ping) traffic.
+-   Clear DNS cache if connectivity issues occur:
+    ```bash
+    ipconfig /flushdns
+    ```
+-   Check the status of **AD DS** and **DNS** services by running `services.msc` and confirming that they are running.
