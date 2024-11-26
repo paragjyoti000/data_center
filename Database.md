@@ -310,3 +310,230 @@ DELETE FROM Employees WHERE EmployeeID = 1;
 5. **SQLite**
 
 ---
+
+## **SQL Data Types and Commands**
+
+### **SQL Data Types**
+
+Data types in SQL define the kind of data that can be stored in a table column.
+
+#### 1. **Numeric Data Types**
+
+Used for storing numbers.
+
+| **Data Type**        | **Description**                                 |
+| -------------------- | ----------------------------------------------- |
+| **INT/INTEGER**      | Whole numbers.                                  |
+| **SMALLINT**         | Smaller range of whole numbers.                 |
+| **BIGINT**           | Large range of whole numbers.                   |
+| **DECIMAL(p,s)**     | Fixed-point numbers with precision and scale.   |
+| **NUMERIC(p,s)**     | Same as `DECIMAL`.                              |
+| **FLOAT**            | Approximate numbers with floating-point values. |
+| **REAL**             | Single-precision floating-point numbers.        |
+| **DOUBLE PRECISION** | Double-precision floating-point numbers.        |
+
+---
+
+#### 2. **Character/String Data Types**
+
+Used for storing text.
+
+| **Data Type**  | **Description**                               |
+| -------------- | --------------------------------------------- |
+| **CHAR(n)**    | Fixed-length string.                          |
+| **VARCHAR(n)** | Variable-length string with a max length `n`. |
+| **TEXT**       | Large variable-length string.                 |
+
+---
+
+#### 3. **Date and Time Data Types**
+
+Used for storing date and time values.
+
+| **Data Type** | **Description**                              |
+| ------------- | -------------------------------------------- |
+| **DATE**      | Stores date (YYYY-MM-DD).                    |
+| **TIME**      | Stores time (HH:MM:SS).                      |
+| **DATETIME**  | Stores date and time (YYYY-MM-DD HH:MM:SS).  |
+| **TIMESTAMP** | Stores date and time with timezone support.  |
+| **YEAR**      | Stores year as a 4-digit value (e.g., 2024). |
+
+---
+
+#### 4. **Binary Data Types**
+
+Used for storing binary data like files or images.
+
+| **Data Type**    | **Description**                            |
+| ---------------- | ------------------------------------------ |
+| **BINARY(n)**    | Fixed-length binary data.                  |
+| **VARBINARY(n)** | Variable-length binary data.               |
+| **BLOB**         | Binary Large Object for large binary data. |
+
+---
+
+#### 5. **Boolean Data Types**
+
+Stores logical values.
+| **Data Type** | **Description** |
+|---------------------|------------------------------|
+| **BOOLEAN** | Stores `TRUE` or `FALSE`. |
+
+---
+
+#### 6. **Other Data Types**
+
+Used for specialized data.
+
+| **Data Type** | **Description**                    |
+| ------------- | ---------------------------------- |
+| **ENUM**      | Stores predefined values.          |
+| **SET**       | Stores multiple predefined values. |
+| **JSON**      | Stores JSON-formatted data.        |
+| **XML**       | Stores XML-formatted data.         |
+
+---
+
+### **SQL Commands**
+
+SQL commands are categorized into five groups:
+
+---
+
+#### 1. **Data Query Language (DQL)**
+
+Used for querying data from the database.
+
+| **Command** | **Description**                         |
+| ----------- | --------------------------------------- |
+| `SELECT`    | Retrieves data from one or more tables. |
+
+**Example:**
+
+```sql
+SELECT column1, column2 FROM table_name WHERE condition;
+```
+
+---
+
+#### 2. **Data Definition Language (DDL)**
+
+Used to define or modify database structures.
+
+| **Command** | **Description**                                      |
+| ----------- | ---------------------------------------------------- |
+| `CREATE`    | Creates new database objects like tables.            |
+| `ALTER`     | Modifies existing database objects.                  |
+| `DROP`      | Deletes database objects.                            |
+| `TRUNCATE`  | Removes all data from a table but retains structure. |
+
+**Examples:**
+
+-   Create:
+    ```sql
+    CREATE TABLE table_name (
+        column1 datatype,
+        column2 datatype
+    );
+    ```
+-   Alter:
+    ```sql
+    ALTER TABLE table_name ADD column_name datatype;
+    ```
+-   Drop:
+    ```sql
+    DROP TABLE table_name;
+    ```
+
+---
+
+#### 3. **Data Manipulation Language (DML)**
+
+Used for managing data within tables.
+
+| **Command** | **Description**                    |
+| ----------- | ---------------------------------- |
+| `INSERT`    | Adds new records to a table.       |
+| `UPDATE`    | Modifies existing data in a table. |
+| `DELETE`    | Removes records from a table.      |
+
+**Examples:**
+
+-   Insert:
+    ```sql
+    INSERT INTO table_name (column1, column2) VALUES (value1, value2);
+    ```
+-   Update:
+    ```sql
+    UPDATE table_name SET column1 = value1 WHERE condition;
+    ```
+-   Delete:
+    ```sql
+    DELETE FROM table_name WHERE condition;
+    ```
+
+---
+
+#### 4. **Transaction Control Language (TCL)**
+
+Used to manage database transactions.
+
+| **Command** | **Description**                                   |
+| ----------- | ------------------------------------------------- |
+| `COMMIT`    | Saves the changes permanently.                    |
+| `ROLLBACK`  | Reverts changes since the last commit.            |
+| `SAVEPOINT` | Sets a point within a transaction to rollback to. |
+
+**Examples:**
+
+-   Commit:
+    ```sql
+    COMMIT;
+    ```
+-   Rollback:
+    ```sql
+    ROLLBACK;
+    ```
+
+---
+
+#### 5. **Data Control Language (DCL)**
+
+Used to control access to data.
+
+| **Command** | **Description**                 |
+| ----------- | ------------------------------- |
+| `GRANT`     | Provides permissions to users.  |
+| `REVOKE`    | Removes permissions from users. |
+
+**Examples:**
+
+-   Grant:
+    ```sql
+    GRANT SELECT, INSERT ON table_name TO user_name;
+    ```
+-   Revoke:
+    ```sql
+    REVOKE SELECT, INSERT ON table_name FROM user_name;
+    ```
+
+---
+
+### **Specialized SQL Clauses**
+
+-   **`WHERE`**: Filters rows based on conditions.
+-   **`GROUP BY`**: Groups rows with similar values.
+-   **`HAVING`**: Filters groups after grouping.
+-   **`ORDER BY`**: Sorts query results.
+-   **`LIMIT`**: Limits the number of rows returned.
+-   **`JOIN`**: Combines rows from multiple tables.
+
+**Example of a JOIN:**
+
+```sql
+SELECT employees.name, departments.name
+FROM employees
+JOIN departments ON employees.department_id = departments.id;
+```
+
+---
