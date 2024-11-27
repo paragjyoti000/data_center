@@ -709,3 +709,126 @@ The file system manages how data is stored and retrieved on a disk.
     - Protect sensitive data with encryption.
 
 ---
+
+### **Mirroring and Striping in Data Storage**
+
+Mirroring and striping are key techniques used in data storage, often in the context of RAID (Redundant Array of Independent/Inexpensive Disks). Each method serves specific purposes related to performance, redundancy, and fault tolerance.
+
+---
+
+### **1. Mirroring (RAID 1)**
+
+**Definition:**  
+Mirroring involves duplicating the same data on two or more disks. This ensures that if one disk fails, the other(s) still have an identical copy of the data.
+
+#### **How It Works:**
+
+-   Data written to one disk is simultaneously written to another.
+-   Read operations can occur from either disk, often improving read speed.
+-   No data striping or splitting—each disk holds a full copy of all data.
+
+#### **Advantages:**
+
+1. **High Fault Tolerance:** Complete data redundancy ensures no data loss if one disk fails.
+2. **Fast Read Performance:** Multiple disks can be used for reading in parallel.
+3. **Easy Recovery:** In the event of a failure, the mirrored disk can be used directly.
+
+#### **Disadvantages:**
+
+1. **Storage Efficiency:** Only 50% of the total disk capacity is usable (e.g., two 1TB disks provide 1TB usable storage).
+2. **Write Performance:** Writing to two disks simultaneously may introduce a slight delay.
+
+#### **Use Cases:**
+
+-   Critical systems where data loss is unacceptable, such as:
+    -   Financial databases.
+    -   Server environments requiring high availability.
+
+---
+
+### **2. Striping (RAID 0)**
+
+**Definition:**  
+Striping involves splitting data into smaller chunks and spreading (or "striping") them across multiple disks. This improves performance but provides no redundancy.
+
+#### **How It Works:**
+
+-   Data is divided into "stripes" and written sequentially across all disks in the array.
+-   Parallel read/write operations improve speed significantly.
+-   No data duplication or parity information is stored.
+
+#### **Advantages:**
+
+1. **High Performance:**
+    - Faster read and write speeds due to parallel access.
+    - Ideal for large file operations like video editing.
+2. **Full Disk Utilization:** All available storage capacity is used (e.g., two 1TB disks provide 2TB usable storage).
+
+#### **Disadvantages:**
+
+1. **No Fault Tolerance:**
+    - If one disk fails, all data is lost.
+2. **Higher Risk:** Increased chance of failure since more disks are involved.
+
+#### **Use Cases:**
+
+-   High-performance applications where speed is critical, and data loss is acceptable, such as:
+    -   Gaming systems.
+    -   Temporary data storage.
+
+---
+
+### **Key Comparison: Mirroring vs. Striping**
+
+| **Aspect**             | **Mirroring (RAID 1)**              | **Striping (RAID 0)**                    |
+| ---------------------- | ----------------------------------- | ---------------------------------------- |
+| **Purpose**            | Redundancy and fault tolerance.     | Performance improvement.                 |
+| **Data Storage**       | Duplicates data on multiple disks.  | Splits data across multiple disks.       |
+| **Fault Tolerance**    | High (data survives disk failure).  | None (data lost if a single disk fails). |
+| **Storage Efficiency** | 50% (due to duplication).           | 100% (no redundancy).                    |
+| **Read Performance**   | Improved (parallel reading).        | Very high (parallel reading).            |
+| **Write Performance**  | Slightly slower than a single disk. | Very high (parallel writing).            |
+| **Ideal Use Case**     | Mission-critical systems.           | Performance-critical tasks.              |
+
+---
+
+### **Combining Mirroring and Striping: RAID 10**
+
+**RAID 10 (1+0):** Combines the benefits of both techniques.
+
+-   **How It Works:** Data is first mirrored (RAID 1) for redundancy, then striped (RAID 0) for performance.
+-   **Advantages:**
+    -   High fault tolerance.
+    -   High read/write performance.
+-   **Disadvantages:**
+    -   Requires at least 4 disks.
+    -   Expensive due to the number of disks needed.
+
+---
+
+### **Visual Representation**
+
+#### Mirroring:
+
+```
+Disk 1: | DATA A | DATA B | DATA C |
+Disk 2: | DATA A | DATA B | DATA C |
+```
+
+#### Striping:
+
+```
+Disk 1: | DATA A1 | DATA B1 | DATA C1 |
+Disk 2: | DATA A2 | DATA B2 | DATA C2 |
+```
+
+#### RAID 10 (Mirroring + Striping):
+
+```
+Disk 1: | DATA A1 | DATA B1 |
+Disk 2: | DATA A1 | DATA B1 |
+Disk 3: | DATA A2 | DATA B2 |
+Disk 4: | DATA A2 | DATA B2 |
+```
+
+---
