@@ -537,3 +537,175 @@ JOIN departments ON employees.department_id = departments.id;
 ```
 
 ---
+
+## **Storage in Detail**
+
+Storage systems are essential for saving, retrieving, and managing data in modern computing. Let’s explore the key concepts, types, and technologies involved.
+
+---
+
+### **1. Types of Storage**
+
+#### A. **Primary Storage**
+
+-   **Definition:** Volatile memory used for immediate processing.
+-   **Examples:** RAM (Random Access Memory), Cache memory.
+-   **Features:**
+    -   High-speed access.
+    -   Temporary storage (data is lost when power is off).
+
+#### B. **Secondary Storage**
+
+-   **Definition:** Persistent storage for long-term use.
+-   **Examples:** Hard Disk Drives (HDDs), Solid-State Drives (SSDs).
+-   **Features:**
+    -   Non-volatile (data retained even when power is off).
+    -   Used for operating systems, applications, and data files.
+
+#### C. **Tertiary Storage**
+
+-   **Definition:** Used for backup, archiving, or infrequent access.
+-   **Examples:** Tape drives, Optical disks (CD/DVD/Blu-ray).
+-   **Features:**
+    -   Slower access time.
+    -   Typically used for disaster recovery.
+
+#### D. **Cloud Storage**
+
+-   **Definition:** Data stored on remote servers accessed via the internet.
+-   **Examples:** Google Drive, Amazon S3, Microsoft Azure.
+-   **Features:**
+    -   Highly scalable.
+    -   Requires network connectivity.
+
+---
+
+### **2. Disk Storage**
+
+#### A. **Hard Disk Drive (HDD)**
+
+-   **Components:**
+    -   **Platter:** Magnetic disks that store data.
+    -   **Read/Write Head:** Accesses and modifies data.
+    -   **Spindle:** Rotates the platters.
+-   **Features:**
+    -   Large capacity.
+    -   Mechanical parts make it slower than SSDs.
+
+#### B. **Solid-State Drive (SSD)**
+
+-   **Components:**
+    -   Flash memory chips (NAND).
+    -   Controller for managing data storage.
+-   **Features:**
+    -   Faster than HDDs.
+    -   No moving parts, more durable.
+
+#### C. **Hybrid Drives (SSHD)**
+
+-   Combines an HDD and an SSD.
+-   Frequently accessed data is stored in the SSD portion for speed.
+
+---
+
+### **3. RAID (Redundant Array of Independent/Inexpensive Disks)**
+
+RAID combines multiple physical disks into a single logical unit for better performance, redundancy, or both.
+
+#### A. **Types of RAID**
+
+| **RAID Level** | **Description**                                       | **Pros**                                | **Cons**                                       |
+| -------------- | ----------------------------------------------------- | --------------------------------------- | ---------------------------------------------- |
+| **RAID 0**     | Stripes data across disks without redundancy.         | High performance, full capacity usage.  | No fault tolerance. Data loss if a disk fails. |
+| **RAID 1**     | Mirrors data across two disks.                        | High fault tolerance. Easy recovery.    | Storage capacity halved.                       |
+| **RAID 5**     | Stripes data with parity across 3+ disks.             | Fault tolerance. Efficient storage use. | Slower write speeds. Needs 3+ disks.           |
+| **RAID 6**     | Like RAID 5 but with dual parity for more redundancy. | Can survive 2 disk failures.            | More parity overhead.                          |
+| **RAID 10**    | Combines RAID 1 (mirroring) and RAID 0 (striping).    | High performance and fault tolerance.   | Expensive, requires at least 4 disks.          |
+
+#### B. **RAID Use Cases**
+
+-   **RAID 0:** High-speed applications (e.g., gaming, video editing).
+-   **RAID 1:** Critical systems needing data redundancy.
+-   **RAID 5/6:** Enterprise environments needing a balance of performance and redundancy.
+-   **RAID 10:** Databases and applications requiring speed and fault tolerance.
+
+---
+
+### **4. File Systems**
+
+The file system manages how data is stored and retrieved on a disk.
+
+#### Common File Systems:
+
+-   **NTFS (New Technology File System):** Default for Windows. Supports large files and advanced permissions.
+-   **FAT32 (File Allocation Table):** Older, compatible with many devices but limited to 4GB file size.
+-   **EXT (Extended File System):** Used in Linux. Versions include EXT2, EXT3, and EXT4.
+-   **APFS (Apple File System):** Optimized for macOS and iOS devices.
+
+---
+
+### **5. Storage Networking**
+
+#### A. **Direct-Attached Storage (DAS)**
+
+-   Physically connected to a computer.
+-   Examples: Internal HDD/SSD, external USB drives.
+
+#### B. **Network-Attached Storage (NAS)**
+
+-   Connected to a network for shared storage.
+-   Provides file-level access.
+-   Example: A home media server.
+
+#### C. **Storage Area Network (SAN)**
+
+-   High-speed network of storage devices.
+-   Provides block-level access.
+-   Common in enterprise environments.
+
+---
+
+### **6. Backup Storage**
+
+#### A. **Local Backup**
+
+-   Data stored on external HDDs, NAS devices, or tape drives.
+
+#### B. **Cloud Backup**
+
+-   Data stored on remote servers for disaster recovery.
+-   Examples: AWS Backup, Google Backup.
+
+#### C. **Backup Methods**
+
+-   **Full Backup:** Copies all data. Time and storage-intensive.
+-   **Incremental Backup:** Copies only data changed since the last backup.
+-   **Differential Backup:** Copies all changes since the last full backup.
+
+---
+
+### **7. Key Metrics for Storage Performance**
+
+| **Metric**                                    | **Description**                                     |
+| --------------------------------------------- | --------------------------------------------------- |
+| **Capacity**                                  | Total amount of data the system can store.          |
+| **Throughput**                                | Amount of data processed in a given time.           |
+| **Latency**                                   | Time taken to process a request (e.g., read/write). |
+| **IOPS (Input/Output Operations per Second)** | Measure of disk performance.                        |
+
+---
+
+### **8. Storage Best Practices**
+
+1. **Regular Monitoring:**
+    - Check disk health, RAID status, and IOPS.
+2. **Implement RAID:**
+    - Use RAID for redundancy and performance.
+3. **Data Backup:**
+    - Follow the 3-2-1 rule (3 copies, 2 different media, 1 offsite).
+4. **Cloud Integration:**
+    - Use cloud storage for scalability and disaster recovery.
+5. **Encryption:**
+    - Protect sensitive data with encryption.
+
+---
